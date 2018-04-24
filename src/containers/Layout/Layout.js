@@ -46,10 +46,10 @@ class Layout extends Component {
                         <div className="col m6 s12 secondbox">
                             <div className="card">
                                 <div className="card-content">
-                                    <span className="card-title">Blade</span>
+                                    <span className="card-title">Black Panther</span>
                                     <img
                                         width="100%"
-                                        src="https://wallpaperscraft.com/image/the_legend_of_zelda_sword_graphics_background_22303_1366x768.jpg"
+                                        src="https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2015/10/marvel_black_panther_concept_art.jpg"
                                         alt="Marvel Infinity War"/>
                                 </div>
                                 <div className="card-action">
