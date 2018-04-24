@@ -1,3 +1,7 @@
-nav{
-    background-color: #537fcc;
+.container{
+    height: 400px;
+}
+
+.box{
+    margin-top: 20px;
 }
