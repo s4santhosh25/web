@@ -24,7 +24,7 @@ class Navbar extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="/" className="brand-logo">ReactApp</a>
+          <a href="/" className="brand-logo">Marvel</a>
           <a href="/" data-activates="mobile-demo" className="button-collapse">
             <i className="material-icons">menu</i>
           </a>

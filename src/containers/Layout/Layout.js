@@ -14,11 +14,11 @@ class Layout extends Component {
                 <div
                     className="container"
                     style={{
-                    marginTop: '30px'
+                    marginTop: '0px'
                 }}>
-                    <div class="row">
+                    <div className="row">
                         <div
-                            className="col m6 s12"
+                            className="col m6 s12 firstbox"
                             style={{
                             marginTop: '80px'
                         }}>
@@ -43,15 +43,16 @@ class Layout extends Component {
                                 kinfolk you probably haven't heard of them portland small batch.
                             </div>
                         </div>
-                        <div className="col m6 s12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <span class="card-title">Blade</span>
+                        <div className="col m6 s12 secondbox">
+                            <div className="card">
+                                <div className="card-content">
+                                    <span className="card-title">Blade</span>
                                     <img
                                         width="100%"
-                                        src="https://wallpaperscraft.com/image/the_legend_of_zelda_sword_graphics_background_22303_1366x768.jpg"/>
+                                        src="https://wallpaperscraft.com/image/the_legend_of_zelda_sword_graphics_background_22303_1366x768.jpg"
+                                        alt="Marvel Infinity War"/>
                                 </div>
-                                <div class="card-action">
+                                <div className="card-action">
                                     <div>
                                         <center>Ishtar</center>
                                     </div>
