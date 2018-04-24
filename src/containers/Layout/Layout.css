@@ -18,8 +18,14 @@
     .firstbox{
         margin-top:25px !important;
     }
-
+    
     .secondbox{
+        margin-top: 25px !important;
+    }
+        .thirdbox {
+        margin-top: 25px !important;
+    }
+        .fourthbox{
         margin-top: 25px !important;
     }
 }

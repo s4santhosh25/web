@@ -62,6 +62,56 @@ class Layout extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <div
+                            className="col m6 s12 thirdbox"
+                            style={{
+                            display: 'flex'
+                        }}>
+                            <div className="card">
+                                <div className="card-content">
+                                    {/*<span className="card-title">Black Panther</span>*/}
+                                    <img
+                                        width="100%"
+                                        src="http://www.hdfondos.eu/pictures/2014/0315/1/iron-man-black-background-679307.jpg"
+                                        alt="Marvel Infinity War"/>
+                                </div>
+                                <div className="card-action">
+                                    <div>
+                                        <center>
+                                            <b>Iron Man</b>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            className="col m6 s12 fourthbox"
+                            style={{
+                            marginTop: '80px'
+                        }}>
+                            <div className="col s12">
+                                <b
+                                    style={{
+                                    fontSize: '20px'
+                                }}>
+                                    Iron Man
+                                </b>
+                            </div>
+                            <div
+                                className="col s12"
+                                style={{
+                                marginTop: '10px',
+                                lineHeight: '2'
+                            }}>
+                                Iron Man is a 2008 American superhero film based on the Marvel Comics character
+                                of the same name, produced by Marvel Studios and distributed by Paramount
+                                Pictures.[N 1] It is the first film in the Marvel Cinematic Universe (MCU). The
+                                film was directed by Jon Favreau, with a screenplay by the writing teams of Mark
+                                Fergus and Hawk Ostby and Art Marcum and Matt Holloway.
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
