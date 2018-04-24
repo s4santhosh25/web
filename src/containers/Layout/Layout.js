@@ -1,30 +1,68 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import './Layout.css';
 
 class Layout extends Component {
 
     render() {
-      return (
-            <div>
-                <Navbar />
-                <div className='container'>
-                <div class="col s12 m2 box">
-                    <div class="z-depth-5">
-                        <form> 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="text" type="text" class="validate" />
-                                    <label for="text"  data-error="wrong" data-success="right">Password</label>
+        return (
+            <div style={{
+                position: 'relative'
+            }}>
+                <Navbar/>
+                <div className="imageloader responsive-img"></div>
+                <div
+                    className="container"
+                    style={{
+                    marginTop: '30px'
+                }}>
+                    <div class="row">
+                        <div
+                            className="col m6 s12"
+                            style={{
+                            marginTop: '80px'
+                        }}>
+                            <div className="col s12">
+                                <b
+                                    style={{
+                                    fontSize: '20px'
+                                }}>
+                                    Ishtar
+                                </b>
+                            </div>
+                            <div
+                                className="col s12"
+                                style={{
+                                marginTop: '10px',
+                                lineHeight: '2'
+                            }}>
+                                Literally venmo before they sold out, DIY heirloom forage polaroid offal yr
+                                pop-up selfies health goth. Typewriter scenester hammock truffaut meditation,
+                                squid before they sold out polaroid portland tousled taxidermy vice. Listicle
+                                butcher thundercats, taxidermy pitchfork next level roof party crucifix narwhal
+                                kinfolk you probably haven't heard of them portland small batch.
+                            </div>
+                        </div>
+                        <div className="col m6 s12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <span class="card-title">Blade</span>
+                                    <img
+                                        width="100%"
+                                        src="https://wallpaperscraft.com/image/the_legend_of_zelda_sword_graphics_background_22303_1366x768.jpg"/>
+                                </div>
+                                <div class="card-action">
+                                    <div>
+                                        <center>Ishtar</center>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-                </div>
             </div>
-      );
+        );
     }
-  }
-  
-  export default Layout;
+}
+
+export default Layout;

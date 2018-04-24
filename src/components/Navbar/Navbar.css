@@ -1,9 +1,11 @@
 nav{
-    background-color: grey;
+    background-color: transparent;
+    position: absolute;
 }
 
 .nav-wrapper > a{
     font-size: 22px;
     padding-left: 25px;
 }
+
 
