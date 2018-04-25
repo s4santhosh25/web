@@ -36,14 +36,12 @@ class Navbar extends Component {
               <a href="badges.html">Components</a>
             </li>
             <li>
-              <a href="collapsible.html">
-                <i className="material-icons">border_color</i>
-              </a>
+              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#modal1">
+              <i className="material-icons left">border_color</i>Register</a>
             </li>
             <li>
-              <a className="waves-effect waves-light modal-trigger" href="#modal1">
-                <i className="material-icons">arrow_upward</i>
-              </a>
+              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#modal1">
+              <i className="material-icons left">arrow_upward</i>Login</a>
             </li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
@@ -54,12 +52,12 @@ class Navbar extends Component {
               <a href="badges.html">Components</a>
             </li>
             <li>
-              <a href="collapsible.html">Javascript</a>
+              <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#modal1">
+              <i className="material-icons left">border_color</i>Register</a>
             </li>
             <li>
-            <a className="waves-effect waves-light modal-trigger" href="#modal1">
-                <i className="material-icons">arrow_upward</i>
-            </a>
+            <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#modal1">
+              <i className="material-icons left">arrow_upward</i>Login</a>
             </li>
           </ul>
         </div>
