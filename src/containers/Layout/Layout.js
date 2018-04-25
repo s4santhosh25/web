@@ -29,11 +29,11 @@ class Layout extends Component {
     }
 
     loginSubmit(){
-        console.log(this.email, this.password.value);
-        this.loginData={
+        this.loginData = {
             email: this.email.value,
-            password: this.password
+            password: this.password.value
         };
+        console.log(this.loginData);
     }
 
     render() {
@@ -143,7 +143,7 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-                <Modal />
+                <Modal submit={this.loginSubmit}/>
             </div>
         );
     }

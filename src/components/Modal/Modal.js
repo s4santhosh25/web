@@ -9,7 +9,7 @@ render(){
           <h4 style={ {textAlign: 'center'} }>Login</h4>
                   <div className="row">
                       <div className="input-field col s12 m8 offset-m2">
-                          <i className="material-icons prefix">person_outline</i>
+                            <i className="material-icons prefix">person_outline</i>
                           <input id="email" type="email" ref={el => this.email = el} onChange={this.loginValidation} />
                           <label htmlFor="email" data-error="wrong" data-success="right">Email</label>
                       </div>
@@ -22,7 +22,7 @@ render(){
       </div>
       <div className="row">
           <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1">Clear</button>
-          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.loginSubmit}>Login</button>
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.submit}>Login</button>
      </div>
       <div className="row" style={{ marginTop: '20px'}}>
               <span className="blue-text text-darken-2 col s6" style={{textAlign:'center'}}>Register Now?</span>
