@@ -41,7 +41,7 @@ class Navbar extends Component {
               </a>
             </li>
             <li>
-              <a href="collapsible.html">
+              <a className="waves-effect waves-light modal-trigger" href="#modal1">
                 <i className="material-icons">arrow_upward</i>
               </a>
             </li>
@@ -57,7 +57,9 @@ class Navbar extends Component {
               <a href="collapsible.html">Javascript</a>
             </li>
             <li>
-              <a href="mobile.html">Mobile</a>
+            <a className="waves-effect waves-light modal-trigger" href="#modal1">
+                <i className="material-icons">arrow_upward</i>
+            </a>
             </li>
           </ul>
         </div>

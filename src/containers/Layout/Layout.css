@@ -35,6 +35,16 @@
     }
 }
 
+.modal,.modal-footer{
+    background-color: white !important;
+    color:black;
+}
+
+.modal{
+    top:25% !important;
+    box-shadow: 10px 5px 20px black !important;
+}
+
 @media only screen and (max-width: 768px){
      .imageloader{
         background-size: 800px 400px;
