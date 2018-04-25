@@ -9,7 +9,6 @@
 .imageloader{
     background: url('../../Assets/images/ws_The_Avengers_1366x768.jpg') no-repeat center center;
     width:100%;
-    /* background-position-y: 0px; */
     height:350px;
 }
 
@@ -33,6 +32,7 @@
         background-size: 600px 500px !important;
         height: 300px;
     }
+    
 }
 
 .modal,.modal-footer{

@@ -4,15 +4,31 @@ class Modal extends Component {
 
 render(){
     return(
-    <div id="modal1" className="modal modal-fixed-footer">
+      <div id="modal1" className="modal">
       <div className="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
+          <h4 style={ {textAlign: 'center'} }>Login</h4>
+                  <div className="row">
+                      <div className="input-field col s12 m8 offset-m2">
+                          <i className="material-icons prefix">person_outline</i>
+                          <input id="email" type="email" ref={el => this.email = el} onChange={this.loginValidation} />
+                          <label htmlFor="email" data-error="wrong" data-success="right">Email</label>
+                      </div>
+                      <div className="input-field col s12 m8 offset-m2">
+                          <i className="material-icons prefix">lock_outline</i>
+                          <input id="password" type="password" ref={el => this.password = el} onChange={this.loginValidation} />
+                          <label htmlFor="password" data-error="wrong" data-success="right">Password</label>
+                      </div>
+                  </div>
       </div>
-      <div className="modal-footer">
-        <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+      <div className="row">
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1">Clear</button>
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.loginSubmit}>Login</button>
+     </div>
+      <div className="row" style={{ marginTop: '20px'}}>
+              <span className="blue-text text-darken-2 col s6" style={{textAlign:'center'}}>Register Now?</span>
+              <span className="blue-text text-darken-2 col s6" style={{textAlign:'center'}}>Forgot Password?</span>
       </div>
-    </div>
+  </div>
     );
 }
 

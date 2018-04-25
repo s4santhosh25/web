@@ -2,12 +2,24 @@ import React, {Component} from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import './Layout.css';
 import $ from 'jquery';
-
+import Modal from '../../components/Modal/Modal';
 class Layout extends Component {
 
     constructor(props) {
         super(props);
-        this.loginData = this.loginData.bind(this);
+
+        this.state={
+            success:{
+                email : '',
+                password: ''
+            },
+            errors:{
+                email : '',
+                password: ''
+            }
+        };
+
+        this.loginSubmit = this.loginSubmit.bind(this);
       }
 
     componentDidMount(){
@@ -16,8 +28,12 @@ class Layout extends Component {
           });
     }
 
-    loginData(){
+    loginSubmit(){
         console.log(this.email, this.password.value);
+        this.loginData={
+            email: this.email.value,
+            password: this.password
+        };
     }
 
     render() {
@@ -127,26 +143,7 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-                {/* Modal */}
-                <div id="modal1" className="modal">
-                    <div className="modal-content">
-                        <h4 style={ {textAlign: 'center'} }>Login</h4>
-                                <div className="row">
-                                    <div className="input-field col s12 m8 offset-m2">
-                                        <input id="email" type="email" ref={el => this.email = el} className="validate" />
-                                        <label htmlFor="email" data-error="wrong" data-success="">Email</label>
-                                    </div>
-                                    <div className="input-field col s12 m8 offset-m2">
-                                        <input id="password" type="password" ref={el => this.password = el} className="validate" />
-                                        <label htmlFor="password" data-error="wrong" data-success="">Password</label>
-                                    </div>
-                                </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button className="modal-action modal-close btn waves-effect waves-green btn-flat">Clear</button>
-                        <button className="modal-action modal-close btn waves-effect waves-green btn-flat" onClick={this.loginData}>Login</button>
-                    </div>
-                </div>
+                <Modal />
             </div>
         );
     }
