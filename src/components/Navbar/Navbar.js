@@ -10,7 +10,7 @@ class Navbar extends Component {
     $(document)
       .ready(function () {
         $(".button-collapse").sideNav({
-          menuWidth: 150,
+          menuWidth: 160,
           edge: 'left',
           closeOnClick: true,
           draggable: true,
@@ -30,32 +30,18 @@ class Navbar extends Component {
           </a>
           <ul className="right hide-on-med-and-down">
             <li>
-              <a href="sass.html">Sass</a>
+              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#register"><i className="material-icons left">create</i>Register</a>
             </li>
             <li>
-              <a href="badges.html">Components</a>
-            </li>
-            <li>
-              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#modal1">Register</a>
-            </li>
-            <li>
-              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#modal1">Login</a>
+              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#login"><i className="material-icons left">lock</i>Login</a>
             </li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li>
-              <a href="sass.html">Sass</a>
+              <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#register">Register</a>
             </li>
             <li>
-              <a href="badges.html">Components</a>
-            </li>
-            <li>
-              <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#modal1">
-              <i className="material-icons left">border_color</i>Register</a>
-            </li>
-            <li>
-            <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#modal1">
-              <i className="material-icons left">arrow_upward</i>Login</a>
+            <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#login">Login</a>
             </li>
           </ul>
         </div>

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
-class Modal extends Component {
+class LoginModal extends Component {
 
 render(){
     return(
-      <div id="modal1" className="modal">
+      <div id="login" className="modal">
       <div className="modal-content">
           <h4 style={ {textAlign: 'center'} }>Login</h4>
                   <div className="row">
                       <div className="input-field col s12 m8 offset-m2">
-                            <i className="material-icons prefix">person_outline</i>
+                            <i className="material-icons prefix">drafts</i>
                           <input id="email" type="email" ref={el => this.email = el} onChange={this.loginValidation} />
                           <label htmlFor="email" data-error="wrong" data-success="right">Email</label>
                       </div>
                       <div className="input-field col s12 m8 offset-m2">
-                          <i className="material-icons prefix">lock_outline</i>
+                          <i className="material-icons prefix">lock</i>
                           <input id="password" type="password" ref={el => this.password = el} onChange={this.loginValidation} />
                           <label htmlFor="password" data-error="wrong" data-success="right">Password</label>
                       </div>
@@ -34,4 +34,4 @@ render(){
 
 }
 
-export default Modal; 
+export default LoginModal; 

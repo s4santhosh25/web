@@ -2,23 +2,12 @@ import React, {Component} from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import './Layout.css';
 import $ from 'jquery';
-import Modal from '../../components/Modal/Modal';
+import LoginModal from '../../components/LoginModal/LoginModal';
+import RegisterModal from '../../components/RegisterModal/RegisterModal';
 class Layout extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state={
-            success:{
-                email : '',
-                password: ''
-            },
-            errors:{
-                email : '',
-                password: ''
-            }
-        };
-
         this.loginSubmit = this.loginSubmit.bind(this);
       }
 
@@ -93,7 +82,8 @@ class Layout extends Component {
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div className="row">            
                         <div
                             className="col m6 s12 thirdbox"
                             style={{
@@ -118,7 +108,7 @@ class Layout extends Component {
                         <div
                             className="col m6 s12 fourthbox"
                             style={{
-                            marginTop: '80px'
+                            marginTop: '50px'
                         }}>
                             <div className="col s12">
                                 <b
@@ -143,7 +133,8 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-                <Modal submit={this.loginSubmit}/>
+                <LoginModal submit={this.loginSubmit}/>
+                <RegisterModal />
             </div>
         );
     }

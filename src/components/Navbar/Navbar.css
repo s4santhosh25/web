@@ -8,9 +8,15 @@ nav{
     padding-left: 40px;
 }
 
-nav ul .side-nav{
-    color:white !important;
+#mobile-demo {
+    background-color: whitesmoke;
 }
+
+#mobile-demo li a{
+    color: black !important;
+    text-align: center;
+}
+
 
 
 
