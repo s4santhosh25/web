@@ -15,19 +15,19 @@ render(){
                       </div>
                       <div className="input-field col s12 m8 offset-m2">
                             <i className="material-icons prefix">contact_mail</i>
-                          <input id="registerEmail" type="email" ref={el => this.email = el} />
+                          <input id="registerEmail" type="email" ref={el => this.registerEmail = el} />
                           <label htmlFor="email" data-error="wrong" data-success="right">Email</label>
                       </div>
                       <div className="input-field col s12 m8 offset-m2">
                           <i className="material-icons prefix">lock</i>
-                          <input id="registerPassword" type="password" ref={el => this.password = el}  />
+                          <input id="registerPassword" type="password" ref={el => this.registerPassword = el}  />
                           <label htmlFor="password" data-error="wrong" data-success="right">Password</label>
                       </div>
                   </div>
       </div>
       <div className="row">
           <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1">Clear</button>
-          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.submit}>Login</button>
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.registerSubmit}>Login</button>
      </div>
   </div>
     );

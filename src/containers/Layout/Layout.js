@@ -9,6 +9,7 @@ class Layout extends Component {
     constructor(props) {
         super(props);
         this.loginSubmit = this.loginSubmit.bind(this);
+        this.registerSubmit = this.registerSubmit.bind(this);
       }
 
     componentDidMount(){
@@ -19,10 +20,19 @@ class Layout extends Component {
 
     loginSubmit(){
         this.loginData = {
-            email: this.email.value,
-            password: this.password.value
+            email: this.refs.loginModal.email.value,
+            password: this.refs.loginModal.password.value
         };
         console.log(this.loginData);
+    }
+
+    registerSubmit(){
+        this.registerData = {
+            name: this.refs.registerModal.name.value,
+            email: this.refs.registerModal.registerEmail.value,
+            password: this.refs.registerModal.registerPassword.value
+        };
+        console.log(this.registerData);
     }
 
     render() {
@@ -133,8 +143,8 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-                <LoginModal submit={this.loginSubmit}/>
-                <RegisterModal />
+                <LoginModal ref="loginModal" loginSubmit={this.loginSubmit}/>
+                <RegisterModal ref="registerModal" registerSubmit={this.registerSubmit}/>
             </div>
         );
     }

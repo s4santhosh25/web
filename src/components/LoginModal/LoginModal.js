@@ -22,7 +22,7 @@ render(){
       </div>
       <div className="row">
           <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1">Clear</button>
-          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.submit}>Login</button>
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.loginSubmit}>Login</button>
      </div>
       <div className="row" style={{ marginTop: '20px'}}>
               <span className="blue-text text-darken-2 col s6" style={{textAlign:'center'}}>Register Now?</span>
