@@ -10,23 +10,23 @@ render(){
                   <div className="row">
                       <div className="input-field col s12 m8 offset-m2">
                             <i className="material-icons prefix">person</i>
-                          <input id="name" type="text" ref={el => this.name = el} />
-                          <label htmlFor="name" data-error="wrong" data-success="right">Name</label>
+                          <input id="name" type="text" name="registerName" className={this.props.registerNameClass} ref={el => this.registerName = el} onChange={this.props.registerValidation} />
+                          <label htmlFor="name" data-error={this.props.registerStatus.registerNameError} data-success={this.props.registerStatus.registerNameSuccess}>Name</label>
                       </div>
                       <div className="input-field col s12 m8 offset-m2">
                             <i className="material-icons prefix">contact_mail</i>
-                          <input id="registerEmail" type="email" ref={el => this.registerEmail = el} />
-                          <label htmlFor="email" data-error="wrong" data-success="right">Email</label>
+                          <input id="registerEmail" type="email" name="registerEmail" className={this.props.registerEmailClass} ref={el => this.registerEmail = el} onChange={this.props.registerValidation} />
+                          <label htmlFor="email" data-error={this.props.registerStatus.registerEmailError} data-success={this.props.registerStatus.registerEmailSuccess}>Email</label>
                       </div>
                       <div className="input-field col s12 m8 offset-m2">
                           <i className="material-icons prefix">lock</i>
-                          <input id="registerPassword" type="password" ref={el => this.registerPassword = el}  />
-                          <label htmlFor="password" data-error="wrong" data-success="right">Password</label>
+                          <input id="registerPassword" type="password" name="registerPassword" className={this.props.registerPasswordClass} ref={el => this.registerPassword = el} onChange={this.props.registerValidation} />
+                          <label htmlFor="password" data-error={this.props.registerStatus.registerPasswordError} data-success={this.props.registerStatus.registerPasswordError}>Password</label>
                       </div>
                   </div>
       </div>
       <div className="row">
-          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1">Clear</button>
+          <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1" onClick={this.props.registerCancel}>Clear</button>
           <button className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5" style={{marginLeft:'4px'}} onClick={this.props.registerSubmit}>Login</button>
      </div>
   </div>
