@@ -30,18 +30,28 @@ class Navbar extends Component {
           </a>
           <ul className="right hide-on-med-and-down">
             <li>
-              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#register"><i className="material-icons left">create</i>Register</a>
+              <a
+                className="waves-effect waves-light  waves-effect waves-light modal-trigger"
+                href="#register">
+                <i className="material-icons left">create</i>Register</a>
             </li>
             <li>
-              <a className="waves-effect waves-light  waves-effect waves-light modal-trigger" href="#login"><i className="material-icons left">lock</i>Login</a>
+              <a
+                className="waves-effect waves-light  waves-effect waves-light modal-trigger"
+                href="#login">
+                <i className="material-icons left">lock</i>Login</a>
             </li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li>
-              <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#register">Register</a>
+              <a
+                className="waves-effect waves-light waves-effect waves-light modal-trigger"
+                href="#register">Register</a>
             </li>
             <li>
-            <a className="waves-effect waves-light waves-effect waves-light modal-trigger" href="#login">Login</a>
+              <a
+                className="waves-effect waves-light waves-effect waves-light modal-trigger"
+                href="#login">Login</a>
             </li>
           </ul>
         </div>
