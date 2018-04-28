@@ -5,15 +5,15 @@ import $ from 'jquery';
 import LoginModal from '../../components/LoginModal/LoginModal';
 import RegisterModal from '../../components/RegisterModal/RegisterModal';
 import axios from 'axios';
-import { ApiUrl } from '../../config';
+import {ApiUrl} from '../../config';
 class Layout extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state={
-            loginEmailClass : '',
-            loginPasswordClass : '',
+        this.state = {
+            loginEmailClass: '',
+            loginPasswordClass: '',
             loginStatus: {
                 loginEmailSuccess: '',
                 loginEmailError: '',
@@ -21,8 +21,8 @@ class Layout extends Component {
                 loginPasswordError: ''
             },
             registerNameClass: '',
-            registerEmailClass : '',
-            registerPasswordClass : '',
+            registerEmailClass: '',
+            registerPasswordClass: '',
             registerStatus: {
                 registerNameSuccess: '',
                 registerNameError: '',
@@ -31,281 +31,276 @@ class Layout extends Component {
                 registerPasswordSuccess: '',
                 registerPasswordError: ''
             },
-            registerSubmit: false,
-            loginSubmit: false
+            loginEmail: false,
+            loginPassword: false,
+            registerName: false,
+            registerEmail: false,
+            registerPassword: false
         };
 
-        this.loginSubmit = this.loginSubmit.bind(this);
-        this.loginValidation = this.loginValidation.bind(this);
-        this.loginCancel = this.loginCancel.bind(this);
+        this.loginSubmit = this
+            .loginSubmit
+            .bind(this);
+        this.loginValidation = this
+            .loginValidation
+            .bind(this);
+        this.loginCancel = this
+            .loginCancel
+            .bind(this);
 
-        this.registerSubmit = this.registerSubmit.bind(this);
-        this.registerValidation = this.registerValidation.bind(this);
-        this.registerCancel = this.registerCancel.bind(this);
-      }
-
-    componentDidMount(){
-        $(document).ready(function(){
-            $('.modal').modal();
-          });
+        this.registerSubmit = this
+            .registerSubmit
+            .bind(this);
+        this.registerValidation = this
+            .registerValidation
+            .bind(this);
+        this.registerCancel = this
+            .registerCancel
+            .bind(this);
     }
 
-    loginValidation(e){
-        switch(e.target.name){
+    componentDidMount() {
+        $(document)
+            .ready(function () {
+                $('.modal').modal();
+            });
+    }
+
+    loginValidation(e) {
+        switch (e.target.name) {
             case 'loginName':
-            if(this.refs.loginModal.email.value === ''){
-                this.setState({
-                    loginEmailClass : 'invalid',
-                    loginStatus: {
-                        loginEmailSuccess: '',
-                        loginEmailError : 'Email cannot be empty',
-                    },
-                    loginSubmit : false
-                });
-            } else if(!(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/).test(this.refs.loginModal.email.value)){
-                this.setState({
-                    loginEmailClass : 'invalid',
-                    loginStatus: {
-                        loginEmailSuccess: '',
-                        loginEmailError : 'Enter Correct Email format',
-                    },
-                    loginSubmit : false
-                });
-            } else if(this.refs.loginModal.email.value !== ''){
-                this.setState({
-                    loginEmailClass : 'valid',
-                    loginStatus: {
-                        loginEmailSuccess : '',
-                        loginEmailError : ''
-                    },
-                    loginSubmit : true
-                });
-            }
-            return;
+                if (this.refs.loginModal.email.value === '') {
+                    this.setState({
+                        loginEmailClass: 'invalid',
+                        loginStatus: {
+                            loginEmailSuccess: '',
+                            loginEmailError: 'Email cannot be empty'
+                        },
+                        loginEmail: false
+                    });
+                } else if (!(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/).test(this.refs.loginModal.email.value)) {
+                    this.setState({
+                        loginEmailClass: 'invalid',
+                        loginStatus: {
+                            loginEmailSuccess: '',
+                            loginEmailError: 'Enter Correct Email format'
+                        },
+                        loginEmail: false
+                    });
+                } else if (this.refs.loginModal.email.value !== '') {
+                    this.setState({
+                        loginEmailClass: 'valid',
+                        loginStatus: {
+                            loginEmailSuccess: '',
+                            loginEmailError: ''
+                        },
+                        loginEmail: true
+                    });
+                }
+                return;
 
             case 'loginPassword':
-            if(this.refs.loginModal.password.value === ''){
-                this.setState({
-                    loginPasswordClass : 'invalid',
-                    loginStatus: {
-                        loginPasswordSuccess: '',
-                        loginPasswordError : 'Password cannot be empty',
-                    },
-                    loginSubmit : false
-                });
-            } else if(this.refs.loginModal.password.value !== ''){
-                this.setState({
-                    loginPasswordClass : 'valid',
-                    loginStatus: {
-                        loginPasswordSuccess: '',
-                        loginPasswordError : '',
-                    },
-                    loginSubmit : true
-                });
-            }
-            return;
+                if (this.refs.loginModal.password.value === '') {
+                    this.setState({
+                        loginPasswordClass: 'invalid',
+                        loginStatus: {
+                            loginPasswordSuccess: '',
+                            loginPasswordError: 'Password cannot be empty'
+                        },
+                        loginPassword: false
+                    });
+                } else if (this.refs.loginModal.password.value !== '') {
+                    this.setState({
+                        loginPasswordClass: 'valid',
+                        loginStatus: {
+                            loginPasswordSuccess: '',
+                            loginPasswordError: ''
+                        },
+                        loginPassword: true
+                    });
+                }
+                return;
             default:
-            this.setState({
-                loginSubmit : false
-            });
-            return;
+                this.setState({loginEmail: false, loginPassword: false});
+                return;
         }
     }
 
-    loginSubmit(){
+    loginSubmit() {
         this.loginData = {
             email: this.refs.loginModal.email.value,
             password: this.refs.loginModal.password.value
         };
 
-        if(this.refs.loginModal.email.value === '' || this.refs.loginModal.password.value === ''){
-            this.setState({
-                loginEmailClass : 'invalid',
-                loginPasswordClass : 'invalid',
-                loginStatus: {
-                    loginEmailSuccess: '',
-                    loginEmailError: 'Email cannot be empty',
-                    loginPasswordSuccess: '',
-                    loginPasswordError : 'Password cannot be empty',
-                },
-                loginSubmit : false
-            });
-            console.log(this.state);
-        }
-
-        if(this.state.loginSubmit){
+        if (this.state.loginEmail && this.state.loginPassword) {
             console.log("Submitted", this.loginData);
             axios({
                 method: 'post',
-                url: ApiUrl+'/api/login',
+                url: ApiUrl + '/api/login',
                 data: this.loginData
-              }).then((res) => {
+            }).then((res) => {
                 console.log(res);
-              }).catch((err) => {
+            }).catch((err) => {
                 console.log(err);
-              });
+            });
         }
     }
 
-    loginCancel(){
-        this.refs.loginModal.email.value ='';
-        this.refs.loginModal.password.value ='';
-        this.setState({            
-        loginEmailClass : '',
-        loginPasswordClass : '',        
-        loginStatus: {
-            loginEmailSuccess: '',
-            loginEmailError: '',
-            loginPasswordSuccess: '',
-            loginPasswordError: ''
-        },
-        loginSubmit: false
-    });
+    loginCancel() {
+        this.refs.loginModal.email.value = '';
+        this.refs.loginModal.password.value = '';
+        this.setState({
+            loginEmailClass: '',
+            loginPasswordClass: '',
+            loginStatus: {
+                loginEmailSuccess: '',
+                loginEmailError: '',
+                loginPasswordSuccess: '',
+                loginPasswordError: ''
+            },
+            loginSubmit: false
+        });
     }
 
-    registerValidation(e){
-        switch(e.target.name){
+    registerValidation(e) {
+        switch (e.target.name) {
             case 'registerName':
-            if(this.refs.registerModal.registerName.value === ''){
-                this.setState({
-                    registerNameClass : 'invalid',
-                    registerStatus: {
-                        registerNameSuccess: '',
-                        registerNameError : 'Name cannot be empty',
-                    },
-                    registerSubmit : false
-                });
-            } else if(this.refs.registerModal.registerName.value !== ''){
-                this.setState({
-                    registerNameClass : 'valid',
-                    registerStatus: {
-                        registerNameSuccess: '',
-                        registerNameError : '',
-                    },
-                    registerSubmit : true
-                });
-            }
-            return;
+                if (this.refs.registerModal.registerName.value === '') {
+                    this.setState({
+                        registerNameClass: 'invalid',
+                        registerStatus: {
+                            registerNameSuccess: '',
+                            registerNameError: 'Name cannot be empty'
+                        },
+                        registerName: false
+                    });
+                } else if (this.refs.registerModal.registerName.value !== '') {
+                    this.setState({
+                        registerNameClass: 'valid',
+                        registerStatus: {
+                            registerNameSuccess: '',
+                            registerNameError: ''
+                        },
+                        registerName: true
+                    });
+                }
+                return;
 
             case 'registerEmail':
-            if(this.refs.registerModal.registerEmail.value === ''){
-                this.setState({
-                    registerEmailClass : 'invalid',
-                    registerStatus: {
-                        registerEmailSuccess: '',
-                        registerEmailError : 'Email cannot be empty',
-                    },
-                    registerSubmit : false
-                });
-                console.log(this.state);
-            } else if(!(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/).test(this.refs.registerModal.registerEmail.value)){
-                this.setState({
-                    registerEmailClass : 'invalid',
-                    registerStatus: {
-                        registerEmailSuccess: '',
-                        registerEmailError : 'Enter correct Email format',
-                    },
-                    registerSubmit : false
-                });
-            } else if(this.refs.registerModal.registerEmail.value !== ''){
-                this.setState({
-                    registerEmailClass : 'valid',
-                    registerStatus: {
-                        registerEmailSuccess: '',
-                        registerEmailError : '',
-                    },
-                    registerSubmit : true
-                });
-            }
-            return;
+                if (this.refs.registerModal.registerEmail.value === '') {
+                    this.setState({
+                        registerEmailClass: 'invalid',
+                        registerStatus: {
+                            registerEmailSuccess: '',
+                            registerEmailError: 'Email cannot be empty'
+                        },
+                        registerEmail: false
+                    });
+                    console.log(this.state);
+                } else if (!(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/).test(this.refs.registerModal.registerEmail.value)) {
+                    this.setState({
+                        registerEmailClass: 'invalid',
+                        registerStatus: {
+                            registerEmailSuccess: '',
+                            registerEmailError: 'Enter correct Email format'
+                        },
+                        registerEmail: false
+                    });
+                } else if (this.refs.registerModal.registerEmail.value !== '') {
+                    this.setState({
+                        registerEmailClass: 'valid',
+                        registerStatus: {
+                            registerEmailSuccess: '',
+                            registerEmailError: ''
+                        },
+                        registerEmail: true
+                    });
+                }
+                return;
 
             case "registerPassword":
-            if(this.refs.registerModal.registerPassword.value === ''){
-                this.setState({
-                    registerPasswordClass : 'invalid',
-                    registerStatus: {
-                        registerPasswordSuccess: '',
-                        registerPasswordError : 'Password cannot be empty',
-                    },
-                    registerSubmit : false
-                });
-            } else if(this.refs.registerModal.registerPassword.value.length < 6 ){
-                this.setState({
-                    registerPasswordClass : 'invalid',
-                    registerStatus: {
-                        registerPasswordSuccess: '',
-                        registerPasswordError : 'Password cannot be less than 6',
-                    },
-                    registerSubmit : false
-                });
-            } else if(this.refs.registerModal.registerPassword.value !== ''){
-                this.setState({
-                    registerPasswordClass : 'valid',
-                    registerStatus: {
-                        registerPasswordSuccess: '',
-                        registerPasswordError : '',
-                    },
-                    registerSubmit : true
-                });
-            }
-            return;
+                if (this.refs.registerModal.registerPassword.value === '') {
+                    this.setState({
+                        registerPasswordClass: 'invalid',
+                        registerStatus: {
+                            registerPasswordSuccess: '',
+                            registerPasswordError: 'Password cannot be empty'
+                        },
+                        registerPassword: false
+                    });
+                } else if (this.refs.registerModal.registerPassword.value.length < 6) {
+                    this.setState({
+                        registerPasswordClass: 'invalid',
+                        registerStatus: {
+                            registerPasswordSuccess: '',
+                            registerPasswordError: 'Password cannot be less than 6'
+                        },
+                        registerPassword: false
+                    });
+                } else if (this.refs.registerModal.registerPassword.value !== '') {
+                    this.setState({
+                        registerPasswordClass: 'valid',
+                        registerStatus: {
+                            registerPasswordSuccess: '',
+                            registerPasswordError: ''
+                        },
+                        registerPassword: true
+                    });
+                }
+                return;
             default:
-            this.setState({
-                registerSubmit : false
-            });
-            return;
+                this.setState({registerName: false, registerEmail: false, registerPassword: false});
+                return;
         }
     }
 
-    registerSubmit(){
+    registerSubmit() {
         this.registerData = {
             name: this.refs.registerModal.registerName.value,
             email: this.refs.registerModal.registerEmail.value,
             password: this.refs.registerModal.registerPassword.value
         };
 
-        
-        if(this.state.registerSubmit){
+        if (this.state.registerName || this.state.registerEmail || this.state.registerPassword) {
             console.log("Submitted", this.registerData);
             axios({
                 method: 'post',
-                url: ApiUrl+'/api/register',
+                url: ApiUrl + '/api/register',
                 data: this.registerData
-              }).then((res) => {
+            }).then((res) => {
                 console.log(res);
-              }).catch((err) => {
+            }).catch((err) => {
                 console.log(err);
-              });
+            });
         }
     }
 
-    registerCancel(){
-        this.refs.registerModal.registerName.value ='';
-        this.refs.registerModal.registerEmail.value ='';
-        this.refs.registerModal.registerPassword.value ='';
-        this.setState({   
-        registerNameClass : '',         
-        registerEmailClass : '',
-        registerPasswordClass : '',        
-        registerStatus: {
-            registerNameSuccess : '',
-            registerNameError: '',
-            registerEmailSuccess: '',
-            registerEmailError: '',
-            registerPasswordSuccess: '',
-            registerPasswordError: ''
-        },
-        registerSubmit: false
-    });
+    registerCancel() {
+        this.refs.registerModal.registerName.value = '';
+        this.refs.registerModal.registerEmail.value = '';
+        this.refs.registerModal.registerPassword.value = '';
+        this.setState({
+            registerNameClass: '',
+            registerEmailClass: '',
+            registerPasswordClass: '',
+            registerStatus: {
+                registerNameSuccess: '',
+                registerNameError: '',
+                registerEmailSuccess: '',
+                registerEmailError: '',
+                registerPasswordSuccess: '',
+                registerPasswordError: ''
+            },
+            registerSubmit: false
+        });
     }
-
 
     render() {
         return (
             <div style={{
                 position: 'relative'
             }}>
-                <Navbar />
+                <Navbar/>
                 <div className="imageloader responsive-img"></div>
                 <div
                     className="container"
@@ -358,7 +353,7 @@ class Layout extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row">            
+                    <div className="row">
                         <div
                             className="col m6 s12 thirdbox"
                             style={{
@@ -408,23 +403,28 @@ class Layout extends Component {
                         </div>
                     </div>
                 </div>
-                <LoginModal ref="loginModal" 
-                    loginEmailClass={this.state.loginEmailClass} 
+                <LoginModal
+                    ref="loginModal"
+                    loginEmail={this.state.loginEmail}
+                    loginPassword={this.state.loginPassword}
+                    loginEmailClass={this.state.loginEmailClass}
                     loginStatus={this.state.loginStatus}
-                    loginPasswordClass={this.state.loginPasswordClass} 
-                    loginValidation={this.loginValidation} 
+                    loginPasswordClass={this.state.loginPasswordClass}
+                    loginValidation={this.loginValidation}
                     loginSubmit={this.loginSubmit}
-                    loginCancel={this.loginCancel}
-                />
-                <RegisterModal ref="registerModal"
-                    registerEmailClass={this.state.registerEmailClass} 
+                    loginCancel={this.loginCancel}/>
+                <RegisterModal
+                    ref="registerModal"
+                    registerName={this.state.registerName}
+                    registerEmail={this.state.registerEmail}
+                    registerPassword={this.state.registerPassword}
+                    registerEmailClass={this.state.registerEmailClass}
                     registerStatus={this.state.registerStatus}
-                    registerPasswordClass={this.state.registerPasswordClass} 
-                    registerValidation={this.registerValidation} 
+                    registerPasswordClass={this.state.registerPasswordClass}
+                    registerValidation={this.registerValidation}
                     registerNameClass={this.state.registerNameClass}
                     registerSubmit={this.registerSubmit}
-                    registerCancel={this.registerCancel}
-                />
+                    registerCancel={this.registerCancel}/>
             </div>
         );
     }

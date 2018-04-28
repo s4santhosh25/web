@@ -6,5 +6,6 @@ import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/materialize-css/dist/css/materialize.min.css';
 import '../node_modules/materialize-css/dist/js/materialize';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <App/>, document.getElementById('root'));
 registerServiceWorker();
