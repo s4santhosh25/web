@@ -64,6 +64,7 @@ class Layout extends Component {
             .ready(function () {
                 $('.modal').modal();
             });
+        console.log(this.props);
     }
 
     loginValidation(e) {
@@ -139,7 +140,6 @@ class Layout extends Component {
                 url: ApiUrl + '/api/login',
                 data: this.loginData
             }).then((res) => {
-                console.log(this.props);
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
