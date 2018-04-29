@@ -140,6 +140,20 @@ class Layout extends Component {
                 url: ApiUrl + '/api/login',
                 data: this.loginData
             }).then((res) => {
+                if (res.data.data === "Login Successfull") {
+                    sessionStorage.setItem('main.token', res.data.token);
+                    alert(res.data.data);
+                    this
+                        .props
+                        .history
+                        .replace('/a');
+                } else {
+                    this
+                        .props
+                        .history
+                        .replace('/b');
+                    alert(res.data.data);
+                }
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
