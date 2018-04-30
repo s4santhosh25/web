@@ -1,3 +1,3 @@
 module.exports = {
-    ApiUrl: 'http://localhost:8000'
+    ApiUrl: 'http://sandystorm-api.herokuapp.com'
 };

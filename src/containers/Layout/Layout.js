@@ -6,10 +6,19 @@ import LoginModal from '../../components/LoginModal/LoginModal';
 import RegisterModal from '../../components/RegisterModal/RegisterModal';
 import axios from 'axios';
 import {ApiUrl} from '../../config';
+import toastr from 'toastr';
+import '../../../node_modules/toastr/build/toastr.min.css';
+
 class Layout extends Component {
 
     constructor(props) {
         super(props);
+
+        toastr.options = {
+            "closeButton": false,
+            "positionClass": "toast-top-center",
+            "timeOut": "2000"
+        };
 
         this.state = {
             loginEmailClass: '',
@@ -142,20 +151,19 @@ class Layout extends Component {
             }).then((res) => {
                 if (res.data.data === "Login Successfull") {
                     sessionStorage.setItem('main.token', res.data.token);
-                    alert(res.data.data);
+                    toastr.success(res.data.data);
+                    $('#login').modal('close');
                     this
                         .props
                         .history
                         .replace('/a');
                 } else {
-                    this
-                        .props
-                        .history
-                        .replace('/b');
-                    alert(res.data.data);
+                    toastr.error(res.data.data);
+                    $('#login').modal('open');
                 }
                 console.log(res);
             }).catch((err) => {
+                toastr.error(err);
                 console.log(err);
             });
         }
@@ -173,7 +181,8 @@ class Layout extends Component {
                 loginPasswordSuccess: '',
                 loginPasswordError: ''
             },
-            loginSubmit: false
+            loginEmail: false,
+            loginPassword: false
         });
     }
 
@@ -306,7 +315,9 @@ class Layout extends Component {
                 registerPasswordSuccess: '',
                 registerPasswordError: ''
             },
-            registerSubmit: false
+            registerName: false,
+            registerEmail: false,
+            registerPassword: false
         });
     }
 
