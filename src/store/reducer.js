@@ -19,7 +19,8 @@ const verifyToken = (state = initialState, action) => {
                 url: ApiUrl + '/api/verify',
                 data: null,
                 headers: {
-                    'Authorization': `Bearer ${sessionStorage.getItem('main.token')}`
+                    'Authorization': `Bearer ${sessionStorage.getItem('main.token')}`,
+                    'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
                 if (res.data.auth && res.data.status === "authorized") {

@@ -147,7 +147,10 @@ class Layout extends Component {
             axios({
                 method: 'post',
                 url: ApiUrl + '/api/login',
-                data: this.loginData
+                data: this.loginData,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
             }).then((res) => {
                 if (res.data.data === "Login Successfull") {
                     sessionStorage.setItem('main.token', res.data.token);
@@ -290,7 +293,10 @@ class Layout extends Component {
             axios({
                 method: 'post',
                 url: ApiUrl + '/api/register',
-                data: this.registerData
+                data: this.registerData,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
             }).then((res) => {
                 console.log(res);
             }).catch((err) => {
