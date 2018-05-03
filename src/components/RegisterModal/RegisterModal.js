@@ -59,12 +59,12 @@ class RegisterModal extends Component {
                         className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5 offset-s1"
                         onClick={this.props.registerCancel}>Clear</button>
                     <button
-                        className="modal-action modal-close btn waves-effect teal lighten-2 waves-green btn-flat col s5"
+                        className="modal-action modal-open btn waves-effect teal lighten-2 waves-green btn-flat col s5"
                         style={{
                         marginLeft: '4px'
                     }}
                         disabled={!this.props.registerName || !this.props.registerEmail || !this.props.registerPassword}
-                        onClick={this.props.registerSubmit}>Login</button>
+                        onClick={this.props.registerSubmit}>Register</button>
                 </div>
             </div>
         );

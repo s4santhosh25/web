@@ -152,7 +152,7 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
-                if (res.data.data === "Login Successfull") {
+                if (res.data.data === "Login Successful") {
                     sessionStorage.setItem('main.token', res.data.token);
                     toastr.success(res.data.data);
                     $('#login').modal('close');
@@ -301,12 +301,20 @@ class Layout extends Component {
                 if(res.data.data === 'Registration Successful')
                 {
                     toastr.success(res.data.data);
+                    this.setState({
+                        registerEmailClass : 'valid'
+                    }); 
+                    $('#register').modal('close');
                 }
                 else{
+                    $('#register').modal('open');
+                    this.setState({
+                        registerEmailClass : 'invalid'
+                    }); 
                     toastr.error(res.data.data);
                 }
             }).catch((err) => {
-                toastr.success(err);
+                toastr.error(err);
                 console.log(err);
             });
         }
