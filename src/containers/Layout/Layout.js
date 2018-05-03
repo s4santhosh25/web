@@ -298,8 +298,15 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
-                console.log(res);
+                if(res.data.data === 'Registration Successful')
+                {
+                    toastr.success(res.data.data);
+                }
+                else{
+                    toastr.error(res.data.data);
+                }
             }).catch((err) => {
+                toastr.success(err);
                 console.log(err);
             });
         }
