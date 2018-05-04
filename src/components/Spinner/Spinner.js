@@ -8,7 +8,7 @@ class Spinner extends Component {
     return (
       <div className='spinner'>
         <FadeLoader
-          color={'#775F8D'} 
+          color={'#000000'} 
           loading={this.props.spinner} 
         />
       </div>
