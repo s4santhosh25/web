@@ -8,6 +8,7 @@ import axios from 'axios';
 import {ApiUrl} from '../../config';
 import toastr from 'toastr';
 import '../../../node_modules/toastr/build/toastr.min.css';
+import Spinner from '../../components/Spinner/Spinner';
 
 class Layout extends Component {
 
@@ -21,6 +22,7 @@ class Layout extends Component {
         };
 
         this.state = {
+            spinner: false,
             loginEmailClass: '',
             loginPasswordClass: '',
             loginStatus: {
@@ -144,6 +146,9 @@ class Layout extends Component {
 
         if (this.state.loginEmail && this.state.loginPassword) {
             console.log("Submitted", this.loginData);
+            this.setState({
+                spinner : true
+            });
             axios({
                 method: 'post',
                 url: ApiUrl + '/api/login',
@@ -152,6 +157,9 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
+                this.setState({
+                    spinner : false
+                });
                 if (res.data.data === "Login Successful") {
                     sessionStorage.setItem('main.token', res.data.token);
                     toastr.success(res.data.data);
@@ -472,6 +480,7 @@ class Layout extends Component {
                     registerNameClass={this.state.registerNameClass}
                     registerSubmit={this.registerSubmit}
                     registerCancel={this.registerCancel}/>
+                    { this.state.spinner ? <Spinner spinner={this.state.spinner} /> : null }
             </div>
         );
     }
