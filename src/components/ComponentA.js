@@ -11,6 +11,19 @@ class ComponentA extends Component {
             .bind(this);
 
         console.log('ComponentA', this.props)
+        this
+            .props
+            .verify();
+    }
+
+    componentDidUpdate() {
+        if (!this.props.result.auth || !this.props.result.token || this.props.result.status !== 'authorized') {
+            this
+                .props
+                .history
+                .replace('/');
+        }
+        console.log('componentDidUpdate', this.props);
     }
 
     logout() {
@@ -19,7 +32,7 @@ class ComponentA extends Component {
             .props
             .history
             .replace('/');
-        toastr.success('Logout Successfull');
+        toastr.success('Logout Successful');
     }
 
     render() {

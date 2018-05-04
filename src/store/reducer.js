@@ -36,7 +36,6 @@ const verifyToken = (state = initialState, action) => {
                 }
             }).catch((err) => {
                 console.log(err);
-                return state;
             });
             return state;
         default:
