@@ -52,7 +52,7 @@ class ComponentA extends Component {
                     onClick={this.logout}>
                     <li >
                         <a
-                            className="waves-effect waves-light  waves-effect waves-light modal-trigger"
+                            className="waves-effect waves-light  waves-effect waves-light"
                             style={{
                             color: 'white'
                         }}>
