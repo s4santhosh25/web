@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import toastr from 'toastr';
+import {Auth} from '../store/auth';
 
 class ComponentA extends Component {
 
@@ -9,21 +10,20 @@ class ComponentA extends Component {
         this.logout = this
             .logout
             .bind(this);
-
-        console.log('ComponentA', this.props)
         this
             .props
             .verify();
+        console.log('props', this.props);
     }
 
-    componentDidUpdate() {
-        if (!this.props.result.auth || !this.props.result.token || this.props.result.status !== 'authorized') {
+    componentDidMount() {
+        console.log('componentWillUnMount', this.props);
+        if (!this.props.result.auth) {
             this
                 .props
                 .history
                 .replace('/');
         }
-        console.log('componentDidUpdate', this.props);
     }
 
     logout() {
@@ -79,7 +79,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         verify: () => {
-            dispatch({type: 'AUTH'});
+            Auth().then((data) => {
+                console.log('mapDispatchToProps', data);
+                dispatch(data);
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     };
 };

@@ -1,9 +1,3 @@
-import axios from 'axios';
-import {ApiUrl} from '../config';
-
-// let initialState = {     auth: false,     token: null,     status:
-// 'unauthorized' };
-
 let initialState = {
     auth: false,
     status: 'unauthorized',
@@ -11,34 +5,19 @@ let initialState = {
 };
 
 const verifyToken = (state = initialState, action) => {
-    let newState = {};
+    console.log('reducer', action);
     switch (action.type) {
         case 'AUTH':
-            axios({
-                method: 'post',
-                url: ApiUrl + '/api/verify',
-                data: null,
-                headers: {
-                    'Authorization': `Bearer ${sessionStorage.getItem('main.token')}`,
-                    'Access-Control-Allow-Origin': '*'
-                }
-            }).then((res) => {
-                if (res.data.auth && res.data.status === "authorized") {
-                    state.auth = res.data.auth;
-                    state.token = res.data.token;
-                    state.status = res.data.status;
-                    newState = {
-                        ...state
-                    };
-                    return newState;
-                } else {
-                    return state;
-                }
-            }).catch((err) => {
-                console.log(err);
-            });
-            return state;
+            if (action.auth && action.status === "authorized") {
+                state.auth = action.auth;
+                state.token = action.token;
+                state.status = action.status;
+                return state;
+            } else {
+                return state;
+            }
         default:
+            console.log('default', state);
             return state;
     }
 }

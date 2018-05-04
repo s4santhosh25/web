@@ -146,9 +146,7 @@ class Layout extends Component {
 
         if (this.state.loginEmail && this.state.loginPassword) {
             console.log("Submitted", this.loginData);
-            this.setState({
-                spinner : true
-            });
+            this.setState({spinner: true});
             axios({
                 method: 'post',
                 url: ApiUrl + '/api/login',
@@ -157,9 +155,7 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
-                this.setState({
-                    spinner : false
-                });
+                this.setState({spinner: false});
                 if (res.data.data === "Login Successful") {
                     sessionStorage.setItem('main.token', res.data.token);
                     toastr.success(res.data.data);
@@ -306,19 +302,13 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
-                if(res.data.data === 'Registration Successful')
-                {
+                if (res.data.data === 'Registration Successful') {
                     toastr.success(res.data.data);
-                    this.setState({
-                        registerEmailClass : 'valid'
-                    }); 
+                    this.setState({registerEmailClass: 'valid'});
                     $('#register').modal('close');
-                }
-                else{
+                } else {
                     $('#register').modal('open');
-                    this.setState({
-                        registerEmailClass : 'invalid'
-                    }); 
+                    this.setState({registerEmailClass: 'invalid'});
                     toastr.error(res.data.data);
                 }
             }).catch((err) => {
@@ -479,8 +469,9 @@ class Layout extends Component {
                     registerValidation={this.registerValidation}
                     registerNameClass={this.state.registerNameClass}
                     registerSubmit={this.registerSubmit}
-                    registerCancel={this.registerCancel}/>
-                    { this.state.spinner ? <Spinner spinner={this.state.spinner} /> : null }
+                    registerCancel={this.registerCancel}/> {this.state.spinner
+                    ? <Spinner spinner={this.state.spinner}/>
+                    : null}
             </div>
         );
     }
