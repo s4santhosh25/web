@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import toastr from 'toastr';
-import {Auth} from '../store/auth';
+import {connect} from 'react-redux';
+import Spinner from '../components/Spinner/Spinner';
 
 class ComponentA extends Component {
 
@@ -10,14 +10,18 @@ class ComponentA extends Component {
         this.logout = this
             .logout
             .bind(this);
+
+        this.state = {
+            spinner: false
+        };
+
+        console.log('props', this.props);
         this
             .props
             .verify();
-        console.log('props', this.props);
     }
 
     componentDidMount() {
-        console.log('componentWillUnMount', this.props);
         if (!this.props.result.auth) {
             this
                 .props
@@ -37,6 +41,7 @@ class ComponentA extends Component {
 
     render() {
         return (
+
             <div style={{
                 position: 'relative'
             }}>
@@ -67,26 +72,24 @@ class ComponentA extends Component {
                     fontSize: '36px',
                     textAlign: 'center'
                 }}>Welcome !</div>
+                {this.state.spinner
+                    ? <Spinner spinner={this.state.spinner}/>
+                    : null}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {result: state};
-};
+    return {result: state}
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         verify: () => {
-            Auth().then((data) => {
-                console.log('mapDispatchToProps', data);
-                dispatch(data);
-            }).catch((err) => {
-                console.log(err);
-            })
+            dispatch({type: 'VERIFY'});
         }
-    };
-};
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ComponentA);

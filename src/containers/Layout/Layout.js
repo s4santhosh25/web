@@ -7,6 +7,7 @@ import RegisterModal from '../../components/RegisterModal/RegisterModal';
 import axios from 'axios';
 import {ApiUrl} from '../../config';
 import toastr from 'toastr';
+import {connect} from 'react-redux';
 import '../../../node_modules/toastr/build/toastr.min.css';
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -145,34 +146,23 @@ class Layout extends Component {
         };
 
         if (this.state.loginEmail && this.state.loginPassword) {
-            console.log("Submitted", this.loginData);
+            this
+                .props
+                .verify(this.loginData);
+
             this.setState({spinner: true});
-            axios({
-                method: 'post',
-                url: ApiUrl + '/api/login',
-                data: this.loginData,
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }
-            }).then((res) => {
+
+            setTimeout(() => {
+                console.log('setTimeout', this.props);
                 this.setState({spinner: false});
-                if (res.data.data === "Login Successful") {
-                    sessionStorage.setItem('main.token', res.data.token);
-                    toastr.success(res.data.data);
-                    $('#login').modal('close');
+                if (this.props.result.auth) {
                     this
                         .props
                         .history
                         .replace('/a');
-                } else {
-                    toastr.error(res.data.data);
-                    $('#login').modal('open');
                 }
-                console.log(res);
-            }).catch((err) => {
-                toastr.error(err);
-                console.log(err);
-            });
+            }, 1500);
+
         }
     }
 
@@ -477,4 +467,16 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+    return {result: state}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        verify: (data) => {
+            dispatch({type: 'AUTH', data: data});
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
