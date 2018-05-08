@@ -3,7 +3,7 @@ import './App.css';
 import Layout from './containers/Layout/Layout';
 import ComponentA from '../src/components/ComponentA';
 import ComponentB from '../src/components/ComponentB';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Auth from './store/auth'
 import Chat from './components/Chat/Chat';
 

@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
-import {ApiUrl} from '../../config';
+import './Chat.css';
+import { ApiUrl } from '../../config';
 
 class Chat extends Component {
 
@@ -8,20 +9,33 @@ class Chat extends Component {
         super();
 
         this.state = {
-            chat: []
+            chat: [],
+            chatButtonDisable: true
         };
 
         this.endpoint = ApiUrl;
         this.chatSubmit = this
             .chatSubmit
             .bind(this);
+        this.chatEvent = this.chatEvent.bind(this);
     }
 
     chatSubmit() {
         const socket = socketIOClient(this.endpoint);
-        socket.emit("clientMsg", {text: this.chatInputText.value});
+        socket.emit("clientMsg", { text: this.chatInputText.value });
         this.chatInputText.value = "";
-        // socket.on('newMessage', (d) => {     console.log(d); })
+    }
+
+    chatEvent(e) {
+        if (e.target.value === '') {
+            this.setState({
+                chatButtonDisable: true
+            });
+        } else {
+            this.setState({
+                chatButtonDisable: false
+            });
+        }
     }
 
     componentDidMount() {
@@ -29,14 +43,14 @@ class Chat extends Component {
         socket.on("FromAPI", (res) => {
             console.log(res);
         });
-        
+
         socket.on('ack', (data) => {
             console.log(data.text);
             this
-            .state
-            .chat
-            .push(data.text);
-            this.setState({chat: this.state.chat});
+                .state
+                .chat
+                .push(data.text);
+            this.setState({ chat: this.state.chat });
         });
 
         socket.emit('join', {
@@ -48,17 +62,34 @@ class Chat extends Component {
 
     render() {
         return (
-            <div>
-                Chat App {this.state.chat.length > 0
+            <div className='chatbody'>
+                <div className='chatHeader'>Chat App</div>
+                {this.state.chat.length > 0
                     ? this
                         .state
                         .chat
                         .map(d => {
-                            return <li key={Math.random()}>{d}</li>
+                            return (
+                                <div key={Math.random()} className="row">
+                                    <div className="col s4 m4" style={{ float: 'right' }}>
+                                        <div className="card blue-grey darken-1">
+                                            <div className="card-content white-text" >
+                                                {d}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
                         })
                     : null}
-                <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
-                <button onClick={this.chatSubmit}>Submit</button>
+                <div className='chatFooter container row'>
+                    <div className='col m11'>
+                        <input type='text' id='chatInput' onChange={this.chatEvent} ref={el => this.chatInputText = el} />
+                    </div>
+                    <div className='col m1' >
+                        <button onClick={this.chatSubmit} className='btn' disabled={this.state.chatButtonDisable}>Submit</button>
+                    </div>
+                </div>
             </div>
         );
     }
