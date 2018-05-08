@@ -7,7 +7,6 @@ import RegisterModal from '../../components/RegisterModal/RegisterModal';
 import axios from 'axios';
 import {ApiUrl} from '../../config';
 import toastr from 'toastr';
-import {connect} from 'react-redux';
 import '../../../node_modules/toastr/build/toastr.min.css';
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -140,28 +139,36 @@ class Layout extends Component {
     }
 
     loginSubmit() {
+        this.setState({spinner: true});
         this.loginData = {
             email: this.refs.loginModal.email.value,
             password: this.refs.loginModal.password.value
         };
 
         if (this.state.loginEmail && this.state.loginPassword) {
-            this
-                .props
-                .verify(this.loginData);
-
-            this.setState({spinner: true});
-
-            setTimeout(() => {
-                console.log('setTimeout', this.props);
-                this.setState({spinner: false});
-                if (this.props.result.auth) {
-                    this
-                        .props
-                        .history
-                        .replace('/a');
+            axios({
+                method: 'post',
+                url: ApiUrl + '/api/login',
+                data: this.loginData,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
                 }
-            }, 1500);
+            }).then((res) => {
+                this.setState({spinner: false});
+                console.log(res);
+                if (res.data.data === "Login Successful") {
+                    sessionStorage.setItem('main.token', res.data.token);
+                    toastr.success(res.data.data);
+                    $('#login').modal('close');
+                    this.props.history.replace('/a');
+                } else {
+                    toastr.error(res.data.data);
+                    $('#login').modal('open');
+                }
+            }).catch((err) => {
+                toastr.error(err);
+                console.log(err);
+            });
 
         }
     }
@@ -467,16 +474,4 @@ class Layout extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {result: state}
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        verify: (data) => {
-            dispatch({type: 'AUTH', data: data});
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default Layout;

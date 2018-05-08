@@ -20,6 +20,7 @@ class Chat extends Component {
     chatSubmit() {
         const socket = socketIOClient(this.endpoint);
         socket.emit("clientMsg", {text: this.chatInputText.value});
+        this.chatInputText.value = "";
         // socket.on('newMessage', (d) => {     console.log(d); })
     }
 
@@ -37,6 +38,7 @@ class Chat extends Component {
             .push(data.text);
             this.setState({chat: this.state.chat});
         });
+
         socket.emit('join', {
             room: 'roomA'
         }, (callback) => {

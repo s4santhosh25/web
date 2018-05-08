@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import toastr from 'toastr';
-import {connect} from 'react-redux';
 import Spinner from '../components/Spinner/Spinner';
 
 class ComponentA extends Component {
@@ -16,18 +15,6 @@ class ComponentA extends Component {
         };
 
         console.log('props', this.props);
-        this
-            .props
-            .verify();
-    }
-
-    componentDidMount() {
-        if (!this.props.result.auth) {
-            this
-                .props
-                .history
-                .replace('/');
-        }
     }
 
     logout() {
@@ -80,16 +67,4 @@ class ComponentA extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {result: state}
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        verify: () => {
-            dispatch({type: 'VERIFY'});
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ComponentA);
+export default ComponentA;

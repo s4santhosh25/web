@@ -1,19 +1,8 @@
 import axios from 'axios';
 import {ApiUrl} from '../config';
 
-let state = {
-    type: 'AUTH',
-    auth: false,
-    status: 'unauthorized',
-    token: null
-};
-
-export const Auth = () => {
-    return new Promise(function (resolve, reject) {
-        let newState = {
-            ...state
-        };
-
+class Auth {
+    static verifyToken() {
         axios({
             method: 'post',
             url: ApiUrl + '/api/verify',
@@ -23,18 +12,19 @@ export const Auth = () => {
                 'Access-Control-Allow-Origin': '*'
             }
         }).then((res) => {
+            console.log('Auth', res.data.auth);
             if (res.data.auth && res.data.status === "authorized") {
-                newState.auth = res.data.auth;
-                newState.token = res.data.token;
-                newState.status = res.data.status;
-                resolve(newState);
+                return res.data.auth;
             } else {
-                resolve(newState);
+                return false;
             }
         }).catch((err) => {
+            console.log('Auth', err);
             if (err) 
-                resolve({type: 'ERR', auth: false, status: 'unauthorized', token: null});
+                return false;
             }
         );
-    });
+    };
 }
+
+export default Auth;
