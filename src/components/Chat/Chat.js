@@ -20,29 +20,27 @@ class Chat extends Component {
     chatSubmit() {
         const socket = socketIOClient(this.endpoint);
         socket.emit("clientMsg", {text: this.chatInputText.value});
-
-        socket.on('ack', (data) => {
-            this.state.chat.push(data.text);
-            this.setState({
-                chat : this.state.chat
-            });
-            console.log(data.text);
-        });
-        socket.emit('join',{
-            room: 'roomA'
-        },(callback) => {
-            console.log('callback', callback);
-        });
-
-        // socket.on('newMessage', (d) => {
-        //     console.log(d);
-        // })
+        // socket.on('newMessage', (d) => {     console.log(d); })
     }
 
     componentDidMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
             console.log(res);
+        });
+        
+        socket.on('ack', (data) => {
+            console.log(data.text);
+            this
+            .state
+            .chat
+            .push(data.text);
+            this.setState({chat: this.state.chat});
+        });
+        socket.emit('join', {
+            room: 'roomA'
+        }, (callback) => {
+            console.log('callback', callback);
         });
     }
 
