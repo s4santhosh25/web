@@ -160,7 +160,7 @@ class Layout extends Component {
                     sessionStorage.setItem('main.token', res.data.token);
                     toastr.success(res.data.data);
                     $('#login').modal('close');
-                    this.props.history.replace('/a');
+                    this.props.history.replace('/chat');
                 } else {
                     toastr.error(res.data.data);
                     $('#login').modal('open');

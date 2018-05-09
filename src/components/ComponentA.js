@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import toastr from 'toastr';
+import {withRouter} from 'react-router-dom';
 import Spinner from '../components/Spinner/Spinner';
 
 class ComponentA extends Component {
@@ -67,4 +68,4 @@ class ComponentA extends Component {
     }
 }
 
-export default ComponentA;
+export default withRouter(ComponentA);

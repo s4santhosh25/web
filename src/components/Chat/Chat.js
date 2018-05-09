@@ -5,8 +5,8 @@ import {ApiUrl} from '../../config';
 
 class Chat extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             chat: [],
@@ -51,14 +51,14 @@ class Chat extends Component {
         return (
             <div className='chatbody'>
                 <div className='chatHeader'>Chat App</div>
-                <ul>
+                <ul className='chatUl'>
                     {this.state.chat.length > 0
                         ? this
                             .state
                             .chat
                             .map(d => {
                                 return (
-                                    <li key={Math.random()} className="col m4 s4">
+                                    <li key={Math.random()} className="col m4 s4 chatLi">
                                         {d}
                                     </li>
                                 )

@@ -15,18 +15,18 @@
     width:100%;
 }
 
-ul {
+.chatUl {
     list-style-type: none;
   }
 
-li{
+.chatLi{
     background-color: rgba(128, 89, 167, 0.959);
     color: white;
     width: 30%;
     overflow-wrap: break-word;
 }
 
-li:after{
+.chatLi:after{
     clear: both;
     content: '';
     display: block;
