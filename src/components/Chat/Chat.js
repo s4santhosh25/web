@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import socketIOClient from "socket.io-client";
 import './Chat.css';
-import { ApiUrl } from '../../config';
+import {ApiUrl} from '../../config';
 
 class Chat extends Component {
 
@@ -17,12 +17,14 @@ class Chat extends Component {
         this.chatSubmit = this
             .chatSubmit
             .bind(this);
-        this.chatEvent = this.chatEvent.bind(this);
+        this.chatEvent = this
+            .chatEvent
+            .bind(this);
     }
 
     chatSubmit() {
         const socket = socketIOClient(this.endpoint);
-        socket.emit("clientMsg", { text: this.chatInputText.value });
+        socket.emit("clientMsg", {text: this.chatInputText.value});
         this.chatInputText.value = "";
     }
 
@@ -38,7 +40,7 @@ class Chat extends Component {
                 .state
                 .chat
                 .push(data.text);
-            this.setState({ chat: this.state.chat });
+            this.setState({chat: this.state.chat});
         });
 
         socket.emit('join', {
@@ -58,23 +60,21 @@ class Chat extends Component {
                         .chat
                         .map(d => {
                             return (
-                                <div key={Math.random()} className="row">
-                                    <div className="col s4 m4">
-                                        <div className="card blue-grey darken-1">
-                                            <div className="card-content white-text" >
-                                                {d}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <li key={Math.random()} className="row">
+                                    {d}
+                                </li>
                             )
                         })
                     : null}
                 <div className='chatFooter container row'>
                     <div className='col m11'>
-                        <input type='text' id='chatInput' onChange={this.chatEvent} ref={el => this.chatInputText = el} />
+                        <input
+                            type='text'
+                            id='chatInput'
+                            onChange={this.chatEvent}
+                            ref={el => this.chatInputText = el}/>
                     </div>
-                    <div className='col m1' >
+                    <div className='col m1'>
                         <button onClick={this.chatSubmit} className='btn'>Submit</button>
                     </div>
                 </div>
