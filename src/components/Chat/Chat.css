@@ -11,6 +11,6 @@
 .chatFooter{
     padding-bottom: 100px;
     position: fixed;
-    top:550px;
+    bottom:-330px;
     width:100%;
 }
