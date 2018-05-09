@@ -65,7 +65,7 @@ class Chat extends Component {
                                             color: 'red',
                                             float: 'right',
                                             paddingRight: '10px'
-                                        }}>{moment().format('LLLL')}</div>
+                                        }}>{moment().format('llll')}</div>
                                         <div
                                             style={{
                                             clear: 'both',
