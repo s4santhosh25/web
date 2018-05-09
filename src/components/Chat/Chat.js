@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import jwt_decode from 'jwt-decode';
 import socketIOClient from "socket.io-client";
 import './Chat.css';
 import {ApiUrl} from '../../config';
@@ -27,6 +28,8 @@ class Chat extends Component {
 
     componentDidMount() {
         const socket = socketIOClient(this.endpoint);
+        const token = sessionStorage.getItem('main.token');
+        this.decoded = jwt_decode(token);
         socket.on("FromAPI", (res) => {
             console.log(res);
         });
@@ -59,7 +62,20 @@ class Chat extends Component {
                             .map(d => {
                                 return (
                                     <li key={Math.random()} className="col m4 s4 chatLi">
-                                        {d}
+                                        <div
+                                            style={{
+                                            color: 'red',
+                                            float: 'right',
+                                            paddingRight: '10px'
+                                        }}>{this
+                                                .decoded
+                                                .name
+                                                .toUpperCase()}</div>
+                                        <div
+                                            style={{
+                                            clear: 'both',
+                                            paddingLeft: '10px'
+                                        }}>{d}</div>
                                     </li>
                                 )
                             })
