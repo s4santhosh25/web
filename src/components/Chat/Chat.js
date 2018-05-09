@@ -26,18 +26,6 @@ class Chat extends Component {
         this.chatInputText.value = "";
     }
 
-    chatEvent(e) {
-        if (e.target.value === '') {
-            this.setState({
-                chatButtonDisable: true
-            });
-        } else {
-            this.setState({
-                chatButtonDisable: false
-            });
-        }
-    }
-
     componentDidMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
@@ -71,7 +59,7 @@ class Chat extends Component {
                         .map(d => {
                             return (
                                 <div key={Math.random()} className="row">
-                                    <div className="col s4 m4" style={{ float: 'right' }}>
+                                    <div className="col s4 m4">
                                         <div className="card blue-grey darken-1">
                                             <div className="card-content white-text" >
                                                 {d}
@@ -87,7 +75,7 @@ class Chat extends Component {
                         <input type='text' id='chatInput' onChange={this.chatEvent} ref={el => this.chatInputText = el} />
                     </div>
                     <div className='col m1' >
-                        <button onClick={this.chatSubmit} className='btn' disabled={this.state.chatButtonDisable}>Submit</button>
+                        <button onClick={this.chatSubmit} className='btn'>Submit</button>
                     </div>
                 </div>
             </div>
