@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import jwt_decode from 'jwt-decode';
 import socketIOClient from "socket.io-client";
 import './Chat.css';
+import moment from 'moment';
 import {ApiUrl} from '../../config';
 
 class Chat extends Component {
@@ -28,8 +28,6 @@ class Chat extends Component {
 
     componentDidMount() {
         const socket = socketIOClient(this.endpoint);
-        const token = sessionStorage.getItem('main.token');
-        this.decoded = jwt_decode(token);
         socket.on("FromAPI", (res) => {
             console.log(res);
         });
@@ -67,10 +65,7 @@ class Chat extends Component {
                                             color: 'red',
                                             float: 'right',
                                             paddingRight: '10px'
-                                        }}>{this
-                                                .decoded
-                                                .name
-                                                .toUpperCase()}</div>
+                                        }}>{moment().format('LLLL')}</div>
                                         <div
                                             style={{
                                             clear: 'both',
@@ -82,7 +77,7 @@ class Chat extends Component {
                         : null}
                 </ul>
                 <div className='chatFooter container row'>
-                    <div className='col m11 s11'>
+                    <div className='col m10 s8'>
                         <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
                     </div>
                     <div className='col m1 s1'>
