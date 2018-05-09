@@ -14,3 +14,21 @@
     bottom:-330px;
     width:100%;
 }
+
+ul {
+    list-style-type: none;
+  }
+
+li{
+    background-color: rgba(128, 89, 167, 0.959);
+    color: white;
+    width: 30%;
+    overflow-wrap: break-word;
+}
+
+li:after{
+    clear: both;
+    content: '';
+    display: block;
+    margin-top: 10px;
+}

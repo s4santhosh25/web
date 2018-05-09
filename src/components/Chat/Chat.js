@@ -51,23 +51,25 @@ class Chat extends Component {
         return (
             <div className='chatbody'>
                 <div className='chatHeader'>Chat App</div>
-                {this.state.chat.length > 0
-                    ? this
-                        .state
-                        .chat
-                        .map(d => {
-                            return (
-                                <li key={Math.random()} className="row">
-                                    {d}
-                                </li>
-                            )
-                        })
-                    : null}
+                <ul>
+                    {this.state.chat.length > 0
+                        ? this
+                            .state
+                            .chat
+                            .map(d => {
+                                return (
+                                    <li key={Math.random()} className="col m4 s4">
+                                        {d}
+                                    </li>
+                                )
+                            })
+                        : null}
+                </ul>
                 <div className='chatFooter container row'>
-                    <div className='col m11'>
+                    <div className='col m11 s11'>
                         <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
                     </div>
-                    <div className='col m1'>
+                    <div className='col m1 s1'>
                         <button onClick={this.chatSubmit} className='btn'>Submit</button>
                     </div>
                 </div>
