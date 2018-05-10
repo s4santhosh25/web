@@ -34,7 +34,7 @@ class Chat extends Component {
         this.chatInputText.value = "";
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
             console.log(res);
