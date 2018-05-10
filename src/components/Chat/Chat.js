@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import socketIOClient from "socket.io-client";
 import './Chat.css';
+import axios from 'axios';
 import moment from 'moment';
+import jwt_decode from 'jwt-decode';
 import {ApiUrl} from '../../config';
 
 class Chat extends Component {
@@ -18,15 +20,30 @@ class Chat extends Component {
         this.chatSubmit = this
             .chatSubmit
             .bind(this);
+        this.token = sessionStorage.getItem('main.token');
+        this.decoded = jwt_decode(this.token);
     }
 
     chatSubmit() {
         const socket = socketIOClient(this.endpoint);
-        socket.emit("clientMsg", {text: this.chatInputText.value});
+        socket.emit("clientMsg", {
+            text: this.chatInputText.value,
+            name: this.decoded.name,
+            date: moment().format('llll')
+        });
+        this
+            .state
+            .chat
+            .push({
+                message: this.chatInputText.value,
+                name: this.decoded.name,
+                date: moment().format('llll')
+            });
+        this.setState({chat: this.state.chat});
         this.chatInputText.value = "";
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
             console.log(res);
@@ -46,42 +63,117 @@ class Chat extends Component {
         }, (callback) => {
             console.log('callback', callback);
         });
+
+        axios({
+            method: 'post',
+            url: ApiUrl + '/api/chat',
+            data: null,
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('main.token')}`,
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then((res) => {
+            console.log(res);
+            if (res.data.auth) {
+                this
+                    .state
+                    .chat
+                    .push(...res.data.data);
+                this.setState({chat: this.state.chat});
+            } else {
+                this
+                    .props
+                    .history
+                    .replace('/');
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+
     }
 
     render() {
         return (
             <div className='chatbody'>
                 <div className='chatHeader'>Chat App</div>
-                <ul className='chatUl'>
+                <div className='chatUl row'>
                     {this.state.chat.length > 0
                         ? this
                             .state
                             .chat
-                            .map(d => {
-                                return (
-                                    <li key={Math.random()} className="col m4 s4 chatLi">
+                            .map(d => d.name === this.decoded.name
+                                ? (
+                                    <div
+                                        key={Math.random()}
+                                        className='col m5 s10 card-panel first'
+                                        style={{
+                                        float: 'right',
+                                        marginRight: '5px',
+                                        clear: 'both',
+                                        'overflowWrap': 'break-word'
+                                    }}>
                                         <div
+                                            className="blue-text text-darken-2"
                                             style={{
-                                            color: 'red',
-                                            float: 'right',
-                                            paddingRight: '10px'
-                                        }}>{moment().format('llll')}</div>
+                                            float: 'left'
+                                        }}>
+                                            <b>{d.name}</b>
+                                        </div>
                                         <div
+                                            className="blue-text text-darken-2"
                                             style={{
-                                            clear: 'both',
-                                            paddingLeft: '10px'
-                                        }}>{d}</div>
-                                    </li>
+                                            float: 'right'
+                                        }}>{d.date}</div>
+                                        <div
+                                            className="blue-text text-darken-2"
+                                            style={{
+                                            clear: 'both'
+                                        }}>{d.message}</div>
+                                    </div>
                                 )
-                            })
+                                : (
+                                    <div
+                                        key={Math.random()}
+                                        className='col m5 s10 card-panel first'
+                                        style={{
+                                        float: 'left',
+                                        marginLeft: '5px',
+                                        clear: 'both',
+                                        'overflowWrap': 'break-word'
+                                    }}>
+                                        <div
+                                            className="blue-text text-darken-2"
+                                            style={{
+                                            float: 'left'
+                                        }}>
+                                            <b>{d.name}</b>
+                                        </div>
+                                        <div
+                                            className="blue-text text-darken-2"
+                                            style={{
+                                            float: 'right'
+                                        }}>{d.date}</div>
+                                        <div
+                                            className="blue-text text-darken-2"
+                                            style={{
+                                            clear: 'both'
+                                        }}>{d.message}</div>
+                                    </div>
+                                ))
                         : null}
-                </ul>
-                <div className='chatFooter container row'>
-                    <div className='col m10 s8'>
-                        <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
-                    </div>
-                    <div className='col m1 s1'>
-                        <button onClick={this.chatSubmit} className='btn'>Submit</button>
+                </div>
+                <div className='chatFooter'>
+                    <div className='row'>
+                        <div className='col m9 s8'>
+                            <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
+                        </div>
+                        <div
+                            className='col m1 s1'
+                            style={{
+                            'marginTop': '24px'
+                        }}>
+                            <button onClick={this.chatSubmit} className='btn'>Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
