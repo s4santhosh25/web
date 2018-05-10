@@ -34,6 +34,12 @@ class Chat extends Component {
         this.chatInputText.value = "";
     }
 
+    _handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            this.chatSubmit();
+        }
+    }
+
     componentWillMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
@@ -163,7 +169,11 @@ class Chat extends Component {
                 <div className='chatFooter'>
                     <div className='row'>
                         <div className='col m9 s8'>
-                            <input type='text' id='chatInput' ref={el => this.chatInputText = el}/>
+                            <input
+                                type='text'
+                                id='chatInput'
+                                ref={el => this.chatInputText = el}
+                                onKeyPress={this._handleKeyPress}/>
                         </div>
                         <div
                             className='col m1 s1'
