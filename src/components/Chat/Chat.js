@@ -31,37 +31,34 @@ class Chat extends Component {
             name: this.decoded.name,
             date: moment().format('llll')
         });
-        this
-            .state
-            .chat
-            .push({
-                message: this.chatInputText.value,
-                name: this.decoded.name,
-                date: moment().format('llll')
-            });
-        this.setState({chat: this.state.chat});
+        // this     .state     .chat     .push({         message:
+        // this.chatInputText.value,         name: this.decoded.name,         date:
+        // moment().format('llll')     }); this.setState({chat: this.state.chat});
         this.chatInputText.value = "";
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const socket = socketIOClient(this.endpoint);
         socket.on("FromAPI", (res) => {
             console.log(res);
-        });
-
-        socket.on('ack', (data) => {
-            console.log(data.text);
-            this
-                .state
-                .chat
-                .push(data.text);
-            this.setState({chat: this.state.chat});
         });
 
         socket.emit('join', {
             room: 'roomA'
         }, (callback) => {
             console.log('callback', callback);
+        });
+
+        socket.on('ack', (data) => {
+            console.log('ack', data);
+            let ack = {...data};
+            this
+                .state
+                .chat
+                .push(ack);
+            this.setState({chat: this.state.chat},()=>{
+                console.log('this.state.chat', this.state.chat);
+            });
         });
 
         axios({
