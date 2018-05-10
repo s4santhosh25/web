@@ -31,9 +31,6 @@ class Chat extends Component {
             name: this.decoded.name,
             date: moment().format('llll')
         });
-        // this     .state     .chat     .push({         message:
-        // this.chatInputText.value,         name: this.decoded.name,         date:
-        // moment().format('llll')     }); this.setState({chat: this.state.chat});
         this.chatInputText.value = "";
     }
 
@@ -51,12 +48,16 @@ class Chat extends Component {
 
         socket.on('ack', (data) => {
             console.log('ack', data);
-            let ack = {...data};
+            let ack = {
+                ...data
+            };
             this
                 .state
                 .chat
                 .push(ack);
-            this.setState({chat: this.state.chat},()=>{
+            this.setState({
+                chat: this.state.chat
+            }, () => {
                 console.log('this.state.chat', this.state.chat);
             });
         });
@@ -114,7 +115,7 @@ class Chat extends Component {
                                             style={{
                                             float: 'left'
                                         }}>
-                                            <b>{d.name}</b>
+                                            <b>{'Me'}</b>
                                         </div>
                                         <div
                                             className="blue-text text-darken-2"
