@@ -160,7 +160,10 @@ class Layout extends Component {
                     sessionStorage.setItem('main.token', res.data.token);
                     toastr.success(res.data.data);
                     $('#login').modal('close');
-                    this.props.history.replace('/chat');
+                    this
+                        .props
+                        .history
+                        .replace('/chat');
                 } else {
                     toastr.error(res.data.data);
                     $('#login').modal('open');
@@ -283,6 +286,7 @@ class Layout extends Component {
     }
 
     registerSubmit() {
+        this.setState({spinner: true});
         this.registerData = {
             name: this.refs.registerModal.registerName.value,
             email: this.refs.registerModal.registerEmail.value,
@@ -299,6 +303,7 @@ class Layout extends Component {
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then((res) => {
+                this.setState({spinner: false});
                 if (res.data.data === 'Registration Successful') {
                     toastr.success(res.data.data);
                     this.setState({registerEmailClass: 'valid'});
