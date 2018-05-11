@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 class RegisterModal extends Component {
-
     render() {
         return (
             <div id="register" className="modal">
@@ -69,7 +68,6 @@ class RegisterModal extends Component {
             </div>
         );
     }
-
 }
 
 export default RegisterModal;

@@ -60,14 +60,20 @@ class LoginModal extends Component {
                         className="blue-text text-darken-2 col s6"
                         style={{
                         textAlign: 'center'
-                    }}>              <a
-                    className="waves-effect waves-light waves-effect waves-light modal-trigger"
-                    href="#register">Register Now?</a></span>
+                    }}>
+                        <a
+                            className="waves-effect waves-light waves-effect waves-light modal-trigger"
+                            href="#register">Register Now?</a>
+                    </span>
                     <span
                         className="blue-text text-darken-2 col s6"
                         style={{
                         textAlign: 'center'
-                    }}>Forgot Password?</span>
+                    }}>
+                        <a
+                            className="waves-effect waves-light  waves-effect waves-light modal-trigger"
+                            href="#mail">Forgot Password?</a>
+                    </span>
                 </div>
             </div>
         );

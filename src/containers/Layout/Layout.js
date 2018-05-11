@@ -9,6 +9,7 @@ import {ApiUrl} from '../../config';
 import toastr from 'toastr';
 import '../../../node_modules/toastr/build/toastr.min.css';
 import Spinner from '../../components/Spinner/Spinner';
+import MailModal from '../../components/MailModal/MailModal';
 
 class Layout extends Component {
 
@@ -67,6 +68,12 @@ class Layout extends Component {
             .bind(this);
         this.registerCancel = this
             .registerCancel
+            .bind(this);
+        this.mailSubmit = this
+            .mailSubmit
+            .bind(this);
+        this.mailCancel = this
+            .mailCancel
             .bind(this);
     }
 
@@ -169,6 +176,7 @@ class Layout extends Component {
                     $('#login').modal('open');
                 }
             }).catch((err) => {
+                this.setState({spinner: false});
                 toastr.error(err);
                 console.log(err);
             });
@@ -314,6 +322,7 @@ class Layout extends Component {
                     toastr.error(res.data.data);
                 }
             }).catch((err) => {
+                this.setState({spinner: false});
                 toastr.error(err);
                 console.log(err);
             });
@@ -340,6 +349,44 @@ class Layout extends Component {
             registerEmail: false,
             registerPassword: false
         });
+    }
+
+    mailSubmit() {
+        this.setState({spinner: true});
+        this.mailData = {
+            mailid: this.refs.mailModal.mail.value
+        };
+        console.log('this.mailData', this.mailData);
+        axios({
+            method: 'post',
+            url: ApiUrl + '/api/forgetPassword',
+            data: this.mailData,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then((res) => {
+            this.setState({spinner: false});
+            console.log(res);
+            if (res.data.data === "Email Exist") {
+                toastr.success(res.data.status);
+                $('#login').modal('close');
+                $('#mail').modal('close');
+                this.refs.mailModal.mail.value = '';
+            } else {
+                toastr.error(res.data.data);
+                $('#login').modal('open');
+                $('#mail').modal('open');
+            }
+        }).catch((err) => {
+            this.setState({spinner: false});
+            toastr.error(err);
+            console.log(err);
+        });
+
+    }
+
+    mailCancel() {
+        this.refs.mailModal.mail.value = '';
     }
 
     render() {
@@ -471,7 +518,11 @@ class Layout extends Component {
                     registerValidation={this.registerValidation}
                     registerNameClass={this.state.registerNameClass}
                     registerSubmit={this.registerSubmit}
-                    registerCancel={this.registerCancel}/> {this.state.spinner
+                    registerCancel={this.registerCancel}/>
+                <MailModal
+                    ref="mailModal"
+                    mailSubmit={this.mailSubmit}
+                    mailCancel={this.mailCancel}/> {this.state.spinner
                     ? <Spinner spinner={this.state.spinner}/>
                     : null}
             </div>
