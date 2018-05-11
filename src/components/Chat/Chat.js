@@ -142,6 +142,7 @@ class Chat extends Component {
                                         style={{
                                         float: 'left',
                                         marginLeft: '5px',
+                                        backgroundColor: 'black',
                                         clear: 'both',
                                         'overflowWrap': 'break-word'
                                     }}>
